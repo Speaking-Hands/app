@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">SpeakingHands</string>
+    <string name="grabar">Grabar</string>
+    <string name="welcomeDescription">Nuestra aplicación es una herramienta poderosa diseñada para facilitar la comunicación con personas que utilizan el Lenguaje de Señas Americano. Al dar la bienvenida a nuestro Traductor de Lenguaje de Señas Americano, te ofrecemos una experiencia accesible y eficaz para eliminar las barreras de comunicación.
+
+Con un diseño intuitivo, simplemente pulsa el botón de grabar, ubicado en la esquina inferior derecha de la pantalla, para activar la cámara y empezar a capturar los gestos del lenguaje de señas. Nuestra tecnología avanzada se encargará de procesar las señales visuales y transformarlas en texto comprensible. De esta manera, podrás entender fácilmente el mensaje que se está transmitiendo.
+
+Es un enfoque inclusivo que rompe las limitaciones de la comunicación tradicional, permitiéndote interactuar con fluidez y sin obstáculos. Descarga ahora nuestra aplicación y descubre cómo el poder del lenguaje de señas puede abrir nuevas vías de conexión y entendimiento con personas sordas y con discapacidad auditiva. Únete a nosotros y haz que la comunicación sea una experiencia verdaderamente universal. ¡Es hora de comunicarnos sin fronteras!</string>
 </resources>
