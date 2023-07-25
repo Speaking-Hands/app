@@ -44,13 +44,13 @@ class MainActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if(requestCode == 1111){
-            videoView.visibility = View.VISIBLE
-            description.visibility = View.INVISIBLE
-            grabarButton.visibility = View.INVISIBLE
+        if(requestCode == 1111 && data?.data != null){
+                videoView.visibility = View.VISIBLE
+                description.visibility = View.INVISIBLE
+                grabarButton.visibility = View.INVISIBLE
 
-            videoView.setVideoURI(data?.data)
-            videoView.start()
+                videoView.setVideoURI(data.data)
+                videoView.start()
         }
     }
 
