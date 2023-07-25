@@ -15,6 +15,8 @@ import androidx.core.app.ActivityCompat
 class MainActivity : AppCompatActivity() {
 
     private lateinit var grabarButton: Button
+    private lateinit var cancelarButton: Button
+    private lateinit var traducirButton: Button
     private lateinit var videoView: VideoView
     private lateinit var description: TextView
 
@@ -23,11 +25,14 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         grabarButton = findViewById(R.id.button)
+        cancelarButton = findViewById(R.id.cancelButton)
+        traducirButton = findViewById(R.id.translateButton)
         videoView = findViewById(R.id.videoView)
         description = findViewById(R.id.appDescription)
 
         grabarButton.isEnabled = false
-        videoView.visibility = View.INVISIBLE
+
+        setVideoInvisible()
 
         if(ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), 111)
@@ -39,19 +44,41 @@ class MainActivity : AppCompatActivity() {
             val i = Intent(MediaStore.ACTION_VIDEO_CAPTURE)
             startActivityForResult(i, 1111)
         }
+
+        cancelarButton.setOnClickListener {
+            setVideoInvisible()
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
         if(requestCode == 1111 && data?.data != null){
-                videoView.visibility = View.VISIBLE
-                description.visibility = View.INVISIBLE
-                grabarButton.visibility = View.INVISIBLE
-
-                videoView.setVideoURI(data.data)
-                videoView.start()
+                setVideoVisible(data)
         }
+    }
+
+    private fun setVideoVisible(data: Intent?) {
+        videoView.visibility = View.VISIBLE
+        cancelarButton.visibility = View.VISIBLE
+        traducirButton.visibility = View.VISIBLE
+
+        description.visibility = View.INVISIBLE
+        grabarButton.visibility = View.INVISIBLE
+
+        videoView.setVideoURI(data?.data)
+        videoView.start()
+    }
+
+    private fun setVideoInvisible() {
+        videoView.visibility = View.INVISIBLE
+        cancelarButton.visibility = View.INVISIBLE
+        traducirButton.visibility = View.INVISIBLE
+
+        description.visibility = View.VISIBLE
+        grabarButton.visibility = View.VISIBLE
+
+        videoView.setVideoURI(null)
     }
 
     override fun onRequestPermissionsResult(
