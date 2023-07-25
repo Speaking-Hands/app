@@ -11,6 +11,12 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.VideoView
 import androidx.core.app.ActivityCompat
+import okhttp3.Call
+import okhttp3.Callback
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.Response
+import java.io.IOException
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,6 +25,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var traducirButton: Button
     private lateinit var videoView: VideoView
     private lateinit var description: TextView
+
+    private val client = OkHttpClient()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,6 +55,10 @@ class MainActivity : AppCompatActivity() {
 
         cancelarButton.setOnClickListener {
             setVideoInvisible()
+        }
+
+        traducirButton.setOnClickListener {
+            run("https://speaking-hands-api-zysstglldq-ey.a.run.app")
         }
     }
 
@@ -91,5 +103,17 @@ class MainActivity : AppCompatActivity() {
         if(requestCode == 111 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
             grabarButton.isEnabled = true
         }
+    }
+
+    fun run(url: String) {
+        val request = Request.Builder()
+            .url(url)
+            .addHeader("x-api-key", "PwBpyZ0rW57yrbcNUhFUNaVJMMWDbwm6")
+            .build()
+
+        client.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {}
+            override fun onResponse(call: Call, response: Response) = println(response.body()?.string())
+        })
     }
 }
