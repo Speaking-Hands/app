@@ -21,6 +21,7 @@ import java.io.IOException
 class MainActivity : AppCompatActivity() {
 
     private lateinit var grabarButton: Button
+    private lateinit var galeriaButton: Button
     private lateinit var cancelarButton: Button
     private lateinit var traducirButton: Button
     private lateinit var videoView: VideoView
@@ -32,10 +33,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        grabarButton = findViewById(R.id.button)
+        grabarButton = findViewById(R.id.buttonGrabar)
+        galeriaButton = findViewById(R.id.buttonGaleria)
         cancelarButton = findViewById(R.id.cancelButton)
         traducirButton = findViewById(R.id.translateButton)
-        videoView = findViewById(R.id.videoView)
+        videoView = findViewById(R.id.videoGrabado)
         description = findViewById(R.id.appDescription)
 
         grabarButton.isEnabled = false
@@ -51,6 +53,10 @@ class MainActivity : AppCompatActivity() {
         grabarButton.setOnClickListener {
             val i = Intent(MediaStore.ACTION_VIDEO_CAPTURE)
             startActivityForResult(i, 1111)
+        }
+
+        galeriaButton.setOnClickListener {
+            // TODO open gallery
         }
 
         cancelarButton.setOnClickListener {

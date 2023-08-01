@@ -6,31 +6,10 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <VideoView
-        android:id="@+id/videoView"
-        android:layout_width="413dp"
-        android:layout_height="500dp"
-        app:layout_constraintBottom_toTopOf="@+id/translateButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.5" />
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/grabar"
-        app:layout_constraintBottom_toTopOf="@+id/imageView2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/videoView"
-        app:layout_constraintVertical_bias="0.5" />
+    <!--IMAGENES DE FONDO-->
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imageViewFondo"
         android:layout_width="413dp"
         android:layout_height="91dp"
         app:layout_constraintBottom_toTopOf="@+id/appName"
@@ -42,30 +21,31 @@
         app:srcCompat="@drawable/header" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/imageViewFondo2"
         android:layout_width="413dp"
         android:layout_height="91dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button"
+        app:layout_constraintTop_toBottomOf="@+id/buttonGrabar"
         app:layout_constraintVertical_bias="0.5"
         app:srcCompat="@drawable/header" />
 
-    <TextView
-        android:id="@+id/appDescription"
-        android:layout_width="347dp"
-        android:layout_height="wrap_content"
-        android:text="@string/welcomeDescription"
-        android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        app:layout_constraintBottom_toTopOf="@+id/videoView"
+    <!--VIDEO-->
+
+    <VideoView
+        android:id="@+id/videoGrabado"
+        android:layout_width="413dp"
+        android:layout_height="500dp"
+        app:layout_constraintBottom_toTopOf="@+id/translateButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/videoView"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewFondo"
         app:layout_constraintVertical_bias="0.5" />
+
+    <!--TITULO-->
 
     <TextView
         android:id="@+id/appName"
@@ -76,35 +56,96 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textColor="#673AB7"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/videoView"
+        app:layout_constraintBottom_toTopOf="@+id/videoGrabado"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewFondo"
         app:layout_constraintVertical_bias="0.5" />
+
+    <!--DESCRIPCION-->
+
+    <TextView
+        android:id="@+id/appDescription"
+        android:layout_width="347dp"
+        android:layout_height="wrap_content"
+        android:text="@string/welcomeDescription"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        app:layout_constraintBottom_toTopOf="@+id/videoGrabado"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/videoGrabado"
+        app:layout_constraintVertical_bias="0.5" />
+
+    <!--GRABAR Y GALERIA-->
+
+ <!--   <Button
+        android:id="@+id/buttonGrabar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/grabar"
+        app:icon="@android:drawable/presence_video_online"
+        app:layout_constraintBottom_toTopOf="@+id/imageViewFondo2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/videoGrabado"
+        app:layout_constraintVertical_bias="0.5" />-->
+
+    <Button
+        android:id="@+id/buttonGrabar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/grabar"
+        app:icon="@android:drawable/ic_menu_camera"
+        app:layout_constraintBottom_toTopOf="@+id/imageViewFondo2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/cancelButton"
+        app:layout_constraintTop_toBottomOf="@+id/videoGrabado"
+        app:layout_constraintVertical_bias="0.5" />
+
+    <Button
+        android:id="@+id/buttonGaleria"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/galeria"
+        app:icon="@android:drawable/ic_menu_gallery"
+        app:layout_constraintBottom_toTopOf="@+id/imageViewFondo2"
+        app:layout_constraintEnd_toStartOf="@+id/translateButton"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/videoGrabado"
+        app:layout_constraintVertical_bias="0.5" />
+
+    <!--TRADUCIR Y CANCELAR-->
 
     <Button
         android:id="@+id/translateButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Traducir"
-        app:layout_constraintBottom_toTopOf="@+id/button"
+        android:text="@string/traducir"
+        app:icon="@android:drawable/ic_menu_sort_alphabetically"
+        app:layout_constraintBottom_toTopOf="@+id/imageViewFondo2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/cancelButton"
-        app:layout_constraintTop_toBottomOf="@+id/videoView"
+        app:layout_constraintTop_toBottomOf="@+id/videoGrabado"
         app:layout_constraintVertical_bias="0.5" />
 
     <Button
         android:id="@+id/cancelButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Cancelar"
-        app:layout_constraintBottom_toTopOf="@+id/button"
+        android:text="@string/cancelar"
+        app:icon="@android:drawable/ic_menu_delete"
+        app:layout_constraintBottom_toTopOf="@+id/imageViewFondo2"
         app:layout_constraintEnd_toStartOf="@+id/translateButton"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/videoView"
+        app:layout_constraintTop_toBottomOf="@+id/videoGrabado"
         app:layout_constraintVertical_bias="0.5" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
