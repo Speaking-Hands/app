@@ -27,6 +27,10 @@ class MainActivity : AppCompatActivity() {
     private lateinit var videoView: VideoView
     private lateinit var description: TextView
 
+    private val GALLERY = 1
+    private val CAMERA = 2
+    private val REQUEST_PERMISIONS = 3
+
     private val client = OkHttpClient()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,8 +49,9 @@ class MainActivity : AppCompatActivity() {
 
         setVideoInvisible()
 
-        if(ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), 111)
+        if(ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED &&
+            ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_MEDIA_VIDEO) != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA, Manifest.permission.READ_MEDIA_VIDEO), REQUEST_PERMISIONS)
         } else {
             grabarButton.isEnabled = true
             galeriaButton.isEnabled = true
@@ -54,11 +59,14 @@ class MainActivity : AppCompatActivity() {
 
         grabarButton.setOnClickListener {
             val i = Intent(MediaStore.ACTION_VIDEO_CAPTURE)
-            startActivityForResult(i, 1111)
+            startActivityForResult(i, CAMERA)
         }
 
         galeriaButton.setOnClickListener {
-            // TODO open gallery
+            val i = Intent(Intent.ACTION_PICK,
+                MediaStore.Video.Media.EXTERNAL_CONTENT_URI
+            )
+            startActivityForResult(i, GALLERY)
         }
 
         cancelarButton.setOnClickListener {
@@ -73,8 +81,12 @@ class MainActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if(requestCode == 1111 && data?.data != null){
+        if(requestCode == CAMERA && data?.data != null){
                 setVideoVisible(data)
+        }
+
+        if(requestCode == GALLERY && data?.data != null){
+            setVideoVisible(data)
         }
     }
 
@@ -110,8 +122,9 @@ class MainActivity : AppCompatActivity() {
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
-        if(requestCode == 111 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+        if(requestCode == REQUEST_PERMISIONS && grantResults[0] == PackageManager.PERMISSION_GRANTED){
             grabarButton.isEnabled = true
+            galeriaButton.isEnabled = true
         }
     }
 
