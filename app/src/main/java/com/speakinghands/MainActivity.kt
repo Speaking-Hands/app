@@ -40,6 +40,7 @@ class MainActivity : AppCompatActivity() {
         videoView = findViewById(R.id.videoGrabado)
         description = findViewById(R.id.appDescription)
 
+        galeriaButton.isEnabled = false
         grabarButton.isEnabled = false
 
         setVideoInvisible()
@@ -48,6 +49,7 @@ class MainActivity : AppCompatActivity() {
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), 111)
         } else {
             grabarButton.isEnabled = true
+            galeriaButton.isEnabled = true
         }
 
         grabarButton.setOnClickListener {
@@ -83,6 +85,7 @@ class MainActivity : AppCompatActivity() {
 
         description.visibility = View.INVISIBLE
         grabarButton.visibility = View.INVISIBLE
+        galeriaButton.visibility = View.INVISIBLE
 
         videoView.setVideoURI(data?.data)
         videoView.start()
@@ -95,6 +98,7 @@ class MainActivity : AppCompatActivity() {
 
         description.visibility = View.VISIBLE
         grabarButton.visibility = View.VISIBLE
+        galeriaButton.visibility = View.VISIBLE
 
         videoView.setVideoURI(null)
     }
