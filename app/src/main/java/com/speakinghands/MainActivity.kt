@@ -4,13 +4,13 @@ import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import android.widget.VideoView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.google.android.gms.common.util.IOUtils
 import okhttp3.Call
@@ -21,6 +21,8 @@ import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody
 import okhttp3.Response
+import okhttp3.ResponseBody
+import org.json.JSONObject
 import java.io.IOException
 
 class MainActivity : AppCompatActivity() {
@@ -58,9 +60,20 @@ class MainActivity : AppCompatActivity() {
 
         setVideoInvisible()
 
-        if(ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED &&
-            ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_MEDIA_VIDEO) != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA, Manifest.permission.READ_MEDIA_VIDEO), REQUEST_PERMISIONS)
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.CAMERA
+            ) != PackageManager.PERMISSION_GRANTED &&
+            ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.READ_MEDIA_VIDEO
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.CAMERA, Manifest.permission.READ_MEDIA_VIDEO),
+                REQUEST_PERMISIONS
+            )
         } else {
             grabarButton.isEnabled = true
             galeriaButton.isEnabled = true
@@ -72,7 +85,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         galeriaButton.setOnClickListener {
-            val i = Intent(Intent.ACTION_PICK,
+            val i = Intent(
+                Intent.ACTION_PICK,
                 MediaStore.Video.Media.EXTERNAL_CONTENT_URI
             )
             startActivityForResult(i, GALLERY)
@@ -90,11 +104,11 @@ class MainActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if(requestCode == CAMERA && data?.data != null){
-                setVideoVisible(data)
+        if (requestCode == CAMERA && data?.data != null) {
+            setVideoVisible(data)
         }
 
-        if(requestCode == GALLERY && data?.data != null){
+        if (requestCode == GALLERY && data?.data != null) {
             setVideoVisible(data)
         }
     }
@@ -133,7 +147,7 @@ class MainActivity : AppCompatActivity() {
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
-        if(requestCode == REQUEST_PERMISIONS && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+        if (requestCode == REQUEST_PERMISIONS && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             grabarButton.isEnabled = true
             galeriaButton.isEnabled = true
         }
@@ -147,7 +161,8 @@ class MainActivity : AppCompatActivity() {
 
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {}
-            override fun onResponse(call: Call, response: Response) = println(response.body()?.string())
+            override fun onResponse(call: Call, response: Response) =
+                println(response.body()?.string())
         })
     }
 
@@ -168,12 +183,26 @@ class MainActivity : AppCompatActivity() {
             .post(requestBody)
             .build()
 
-        val client = OkHttpClient.Builder().build()
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {}
 
             @Throws(IOException::class)
-            override fun onResponse(call: Call, response: Response) = println(response.body()?.string())
+            override fun onResponse(call: Call, response: Response) {
+                if (!response.isSuccessful()) println("Unexpected code $response")
+
+                val jsonDataString = response.peekBody(Long.MAX_VALUE).string()
+
+                val result = JSONObject(jsonDataString)
+
+                runOnUiThread {
+                    println(jsonDataString)
+                    setVideoInvisible()
+                    description.text = result.getString("size")
+                }
+
+            }
         })
     }
+
+
 }
