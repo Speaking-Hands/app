@@ -3,6 +3,7 @@ package com.speakinghands
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
@@ -11,10 +12,14 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.VideoView
 import androidx.core.app.ActivityCompat
+import com.google.android.gms.common.util.IOUtils
 import okhttp3.Call
 import okhttp3.Callback
+import okhttp3.MediaType
+import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
 import okhttp3.Request
+import okhttp3.RequestBody
 import okhttp3.Response
 import java.io.IOException
 
@@ -30,6 +35,10 @@ class MainActivity : AppCompatActivity() {
     private val GALLERY = 1
     private val CAMERA = 2
     private val REQUEST_PERMISIONS = 3
+
+    private var URL_BACKEND = "https://speaking-hands-api-zysstglldq-ey.a.run.app";
+
+    private var videoUri = null as Uri?
 
     private val client = OkHttpClient()
 
@@ -74,7 +83,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         traducirButton.setOnClickListener {
-            run("https://speaking-hands-api-zysstglldq-ey.a.run.app")
+            runUploadVideoEndpoint()
         }
     }
 
@@ -99,6 +108,7 @@ class MainActivity : AppCompatActivity() {
         grabarButton.visibility = View.INVISIBLE
         galeriaButton.visibility = View.INVISIBLE
 
+        videoUri = data?.data
         videoView.setVideoURI(data?.data)
         videoView.start()
     }
@@ -112,6 +122,7 @@ class MainActivity : AppCompatActivity() {
         grabarButton.visibility = View.VISIBLE
         galeriaButton.visibility = View.VISIBLE
 
+        videoUri = null
         videoView.setVideoURI(null)
     }
 
@@ -128,14 +139,40 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun run(url: String) {
+    fun runBasicEndpoint() {
         val request = Request.Builder()
-            .url(url)
+            .url(URL_BACKEND)
             .addHeader("x-api-key", "PwBpyZ0rW57yrbcNUhFUNaVJMMWDbwm6")
             .build()
 
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {}
+            override fun onResponse(call: Call, response: Response) = println(response.body()?.string())
+        })
+    }
+
+    fun runUploadVideoEndpoint() {
+
+        val stream = contentResolver.openInputStream(videoUri!!)
+        val byteArray: ByteArray = IOUtils.toByteArray(stream)
+        val requestBody: RequestBody = MultipartBody.Builder()
+            .setType(MultipartBody.FORM)
+            .addFormDataPart(
+                "video", "fname",
+                RequestBody.create(MediaType.parse("video/mp4"), byteArray)
+            )
+            .build()
+        val request: Request = Request.Builder()
+            .url("$URL_BACKEND/upload")
+            .addHeader("x-api-key", "PwBpyZ0rW57yrbcNUhFUNaVJMMWDbwm6")
+            .post(requestBody)
+            .build()
+
+        val client = OkHttpClient.Builder().build()
+        client.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {}
+
+            @Throws(IOException::class)
             override fun onResponse(call: Call, response: Response) = println(response.body()?.string())
         })
     }
