@@ -14,6 +14,8 @@ import android.widget.VideoView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.google.android.gms.common.util.IOUtils
+import com.speakinghands.databinding.ActivityInicioBinding
+import com.speakinghands.databinding.ActivityMostrarVideoBinding
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.MediaType
@@ -27,42 +29,44 @@ import java.io.IOException
 
 class Inicio : AppCompatActivity() {
 
+    private lateinit var binding: ActivityInicioBinding
+
     private lateinit var grabarButton: Button
     private lateinit var galeriaButton: Button
-    private lateinit var cancelarButton: Button
-    private lateinit var traducirButton: Button
-    private lateinit var videoView: VideoView
-    private lateinit var description: TextView
-    private lateinit var progressBar: ProgressBar
 
     private val GALLERY = 1
     private val CAMERA = 2
     private val REQUEST_PERMISIONS = 3
 
-    private var URL_BACKEND = "https://speaking-hands-api-zysstglldq-ey.a.run.app";
-
-    private var videoUri = null as Uri?
-
-    private val client = OkHttpClient()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_inicio)
 
-        grabarButton = findViewById(R.id.buttonGrabar)
-        galeriaButton = findViewById(R.id.buttonGaleria)
-        cancelarButton = findViewById(R.id.cancelButton)
-        traducirButton = findViewById(R.id.translateButton)
-        videoView = findViewById(R.id.videoGrabado)
-        description = findViewById(R.id.appDescription)
-        progressBar = findViewById(R.id.progressBar)
+        binding = ActivityInicioBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        progressBar.visibility = View.INVISIBLE
+        grabarButton = binding.buttonGrabar
+        galeriaButton = binding.buttonGaleria
 
+        checkPermissions()
+
+        grabarButton.setOnClickListener {
+            val i = Intent(MediaStore.ACTION_VIDEO_CAPTURE)
+            startActivityForResult(i, CAMERA)
+        }
+
+        galeriaButton.setOnClickListener {
+            val i = Intent(
+                Intent.ACTION_PICK,
+                MediaStore.Video.Media.EXTERNAL_CONTENT_URI
+            )
+            startActivityForResult(i, GALLERY)
+        }
+
+    }
+
+    private fun checkPermissions() {
         galeriaButton.isEnabled = false
         grabarButton.isEnabled = false
-
-        setVideoInvisible()
 
         if (ActivityCompat.checkSelfPermission(
                 this,
@@ -82,71 +86,16 @@ class Inicio : AppCompatActivity() {
             grabarButton.isEnabled = true
             galeriaButton.isEnabled = true
         }
-
-        grabarButton.setOnClickListener {
-            val i = Intent(MediaStore.ACTION_VIDEO_CAPTURE)
-            startActivityForResult(i, CAMERA)
-        }
-
-        galeriaButton.setOnClickListener {
-            val i = Intent(
-                Intent.ACTION_PICK,
-                MediaStore.Video.Media.EXTERNAL_CONTENT_URI
-            )
-            startActivityForResult(i, GALLERY)
-        }
-
-        cancelarButton.setOnClickListener {
-            setVideoInvisible()
-            endTranslation()
-        }
-
-        traducirButton.setOnClickListener {
-            runUploadVideoEndpoint()
-        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == CAMERA && data?.data != null) {
-            setVideoVisible(data)
+        if ((requestCode == CAMERA || requestCode == GALLERY) && data?.data != null) {
+            val i = Intent(this@Inicio, MostrarVideo::class.java)
+            i.putExtra("videoUri", data.data)
+            startActivity(i)
         }
-
-        if (requestCode == GALLERY && data?.data != null) {
-            setVideoVisible(data)
-        }
-    }
-
-    private fun setVideoVisible(data: Intent?) {
-        videoView.visibility = View.VISIBLE
-        cancelarButton.visibility = View.VISIBLE
-        traducirButton.visibility = View.VISIBLE
-
-        description.visibility = View.INVISIBLE
-        grabarButton.visibility = View.INVISIBLE
-        galeriaButton.visibility = View.INVISIBLE
-
-        val i = Intent(this@Inicio, MostrarVideo::class.java)
-        i.putExtra("videoUri", data?.data)
-        startActivity(i)
-
-        videoUri = data?.data
-        videoView.setVideoURI(data?.data)
-        videoView.start()
-    }
-
-    private fun setVideoInvisible() {
-        videoView.visibility = View.INVISIBLE
-        cancelarButton.visibility = View.INVISIBLE
-        traducirButton.visibility = View.INVISIBLE
-
-        description.visibility = View.VISIBLE
-        grabarButton.visibility = View.VISIBLE
-        galeriaButton.visibility = View.VISIBLE
-
-        videoUri = null
-        videoView.setVideoURI(null)
     }
 
     override fun onRequestPermissionsResult(
@@ -160,72 +109,6 @@ class Inicio : AppCompatActivity() {
             grabarButton.isEnabled = true
             galeriaButton.isEnabled = true
         }
-    }
-
-    fun runBasicEndpoint() {
-        val request = Request.Builder()
-            .url(URL_BACKEND)
-            .addHeader("x-api-key", "PwBpyZ0rW57yrbcNUhFUNaVJMMWDbwm6")
-            .build()
-
-        client.newCall(request).enqueue(object : Callback {
-            override fun onFailure(call: Call, e: IOException) {}
-            override fun onResponse(call: Call, response: Response) =
-                println(response.body()?.string())
-        })
-    }
-
-    fun runUploadVideoEndpoint() {
-
-        val stream = contentResolver.openInputStream(videoUri!!)
-        val byteArray: ByteArray = IOUtils.toByteArray(stream)
-        val requestBody: RequestBody = MultipartBody.Builder()
-            .setType(MultipartBody.FORM)
-            .addFormDataPart(
-                "video", "fname",
-                RequestBody.create(MediaType.parse("video/mp4"), byteArray)
-            )
-            .build()
-        val request: Request = Request.Builder()
-            .url("$URL_BACKEND/predict")
-            .addHeader("x-api-key", "PwBpyZ0rW57yrbcNUhFUNaVJMMWDbwm6")
-            .post(requestBody)
-            .build()
-
-        startTranslation()
-
-        client.newCall(request).enqueue(object : Callback {
-            override fun onFailure(call: Call, e: IOException) {}
-
-            @Throws(IOException::class)
-            override fun onResponse(call: Call, response: Response) {
-                if (!response.isSuccessful()) println("Unexpected code $response")
-
-                val jsonDataString = response.peekBody(Long.MAX_VALUE).string()
-
-                val result = JSONObject(jsonDataString)
-
-                runOnUiThread {
-                    println(jsonDataString)
-                    setVideoInvisible()
-                    endTranslation()
-                    description.text = result.getString("prediction")
-                }
-
-            }
-        })
-    }
-
-    private fun startTranslation() {
-        progressBar.visibility = View.VISIBLE
-        videoView.visibility = View.INVISIBLE
-        traducirButton.isEnabled = false
-    }
-
-    private fun endTranslation() {
-        progressBar.visibility = View.INVISIBLE
-        videoView.visibility = View.INVISIBLE
-        traducirButton.isEnabled = true
     }
 
 
