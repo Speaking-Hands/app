@@ -47,7 +47,7 @@ class Inicio : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.inicio)
+        setContentView(R.layout.activity_inicio)
 
         grabarButton = findViewById(R.id.buttonGrabar)
         galeriaButton = findViewById(R.id.buttonGaleria)
