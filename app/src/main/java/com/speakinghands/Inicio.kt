@@ -127,6 +127,10 @@ class Inicio : AppCompatActivity() {
         grabarButton.visibility = View.INVISIBLE
         galeriaButton.visibility = View.INVISIBLE
 
+        val i = Intent(this@Inicio, MostrarVideo::class.java)
+        i.putExtra("videoUri", data?.data)
+        startActivity(i)
+
         videoUri = data?.data
         videoView.setVideoURI(data?.data)
         videoView.start()
