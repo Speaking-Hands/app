@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.view.View
 import android.widget.Button
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.VideoView
 import androidx.appcompat.app.AppCompatActivity
@@ -33,6 +34,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var traducirButton: Button
     private lateinit var videoView: VideoView
     private lateinit var description: TextView
+    private lateinit var progressBar: ProgressBar
 
     private val GALLERY = 1
     private val CAMERA = 2
@@ -54,6 +56,9 @@ class MainActivity : AppCompatActivity() {
         traducirButton = findViewById(R.id.translateButton)
         videoView = findViewById(R.id.videoGrabado)
         description = findViewById(R.id.appDescription)
+        progressBar = findViewById(R.id.progressBar)
+
+        progressBar.visibility = View.INVISIBLE
 
         galeriaButton.isEnabled = false
         grabarButton.isEnabled = false
@@ -94,6 +99,7 @@ class MainActivity : AppCompatActivity() {
 
         cancelarButton.setOnClickListener {
             setVideoInvisible()
+            endTranslation()
         }
 
         traducirButton.setOnClickListener {
@@ -178,10 +184,12 @@ class MainActivity : AppCompatActivity() {
             )
             .build()
         val request: Request = Request.Builder()
-            .url("$URL_BACKEND/upload")
+            .url("$URL_BACKEND/predict")
             .addHeader("x-api-key", "PwBpyZ0rW57yrbcNUhFUNaVJMMWDbwm6")
             .post(requestBody)
             .build()
+
+        startTranslation()
 
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {}
@@ -197,11 +205,24 @@ class MainActivity : AppCompatActivity() {
                 runOnUiThread {
                     println(jsonDataString)
                     setVideoInvisible()
-                    description.text = result.getString("size")
+                    endTranslation()
+                    description.text = result.getString("prediction")
                 }
 
             }
         })
+    }
+
+    private fun startTranslation() {
+        progressBar.visibility = View.VISIBLE
+        videoView.visibility = View.INVISIBLE
+        traducirButton.isEnabled = false
+    }
+
+    private fun endTranslation() {
+        progressBar.visibility = View.INVISIBLE
+        videoView.visibility = View.INVISIBLE
+        traducirButton.isEnabled = true
     }
 
 
