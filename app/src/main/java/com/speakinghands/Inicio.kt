@@ -22,11 +22,10 @@ import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody
 import okhttp3.Response
-import okhttp3.ResponseBody
 import org.json.JSONObject
 import java.io.IOException
 
-class MainActivity : AppCompatActivity() {
+class Inicio : AppCompatActivity() {
 
     private lateinit var grabarButton: Button
     private lateinit var galeriaButton: Button
@@ -48,7 +47,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.inicio)
 
         grabarButton = findViewById(R.id.buttonGrabar)
         galeriaButton = findViewById(R.id.buttonGaleria)
