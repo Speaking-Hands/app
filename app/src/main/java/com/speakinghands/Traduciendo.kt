@@ -3,6 +3,8 @@ package com.speakinghands
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View.INVISIBLE
+import android.widget.ProgressBar
 import android.widget.TextView
 import com.google.android.gms.common.util.IOUtils
 import com.speakinghands.databinding.ActivityTraduciendoBinding
@@ -22,6 +24,7 @@ class Traduciendo : AppCompatActivity() {
     private lateinit var binding: ActivityTraduciendoBinding
 
     private lateinit var texto: TextView
+    private lateinit var progressBar: ProgressBar
 
 
     private var URL_BACKEND = "https://speaking-hands-api-zysstglldq-ey.a.run.app"
@@ -37,6 +40,7 @@ class Traduciendo : AppCompatActivity() {
         setContentView(binding.root)
 
         texto = binding.textView2
+        progressBar = binding.progressBar
 
         val extras = intent.extras ?: throw Exception("Error in app")
 
@@ -70,6 +74,7 @@ class Traduciendo : AppCompatActivity() {
 
                 runOnUiThread {
                     println(jsonDataString)
+                    progressBar.visibility = INVISIBLE
                     texto.text = result.getString("prediction")
                 }
 

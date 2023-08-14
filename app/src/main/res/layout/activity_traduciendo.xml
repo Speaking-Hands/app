@@ -1,34 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linear"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:gravity="center"
+    android:orientation="vertical"
     tools:context=".Traduciendo">
 
     <ImageView
-        android:id="@+id/imageLogo"
+        android:id="@+id/imageViewFondo1"
         android:layout_width="match_parent"
         android:layout_height="91dp"
-        android:src="@drawable/logo"
-        android:layout_marginBottom="32dp"/>
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="32dp"
+        android:src="@drawable/header" />
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyle"
+    <LinearLayout
+        android:id="@+id/linear2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minHeight="64dp"
-        android:layout_marginBottom="32dp"/>
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        tools:context=".Traduciendo">
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:text="@string/traduciendo" />
+        <ImageView
+            android:id="@+id/imageLogo"
+            android:layout_width="match_parent"
+            android:layout_height="91dp"
+            android:layout_marginBottom="32dp"
+            android:src="@drawable/logo" />
 
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp"
+            android:minHeight="64dp" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/traduciendo"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageViewFondo2"
+        android:layout_width="match_parent"
+        android:layout_height="91dp"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginTop="32dp"
+        android:src="@drawable/header" />
 
 </LinearLayout>
