@@ -3,10 +3,8 @@ package com.speakinghands
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
 import android.widget.TextView
 import com.google.android.gms.common.util.IOUtils
-import com.speakinghands.databinding.ActivityMostrarVideoBinding
 import com.speakinghands.databinding.ActivityTraduciendoBinding
 import okhttp3.Call
 import okhttp3.Callback

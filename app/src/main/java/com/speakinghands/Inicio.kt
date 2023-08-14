@@ -3,29 +3,12 @@ package com.speakinghands
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
-import android.view.View
 import android.widget.Button
-import android.widget.ProgressBar
-import android.widget.TextView
-import android.widget.VideoView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import com.google.android.gms.common.util.IOUtils
 import com.speakinghands.databinding.ActivityInicioBinding
-import com.speakinghands.databinding.ActivityMostrarVideoBinding
-import okhttp3.Call
-import okhttp3.Callback
-import okhttp3.MediaType
-import okhttp3.MultipartBody
-import okhttp3.OkHttpClient
-import okhttp3.Request
-import okhttp3.RequestBody
-import okhttp3.Response
-import org.json.JSONObject
-import java.io.IOException
 
 class Inicio : AppCompatActivity() {
 
