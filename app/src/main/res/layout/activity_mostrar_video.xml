@@ -1,53 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/fullscreenBackgroundColor"
+    android:gravity="center"
+    android:orientation="vertical"
     android:theme="@style/ThemeOverlay.SpeakingHands.FullscreenContainer"
     tools:context=".MostrarVideo">
 
+    <ImageView
+        android:id="@+id/imageViewFondo"
+        android:layout_width="match_parent"
+        android:layout_height="91dp"
+        android:src="@drawable/header" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:minHeight="500dp"
+        android:layout_gravity="center_vertical|center_horizontal">
     <VideoView
         android:id="@+id/fullscreen_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center" />
+        android:layout_centerInParent="true" />
+    </RelativeLayout>
 
-    <FrameLayout
+    <LinearLayout
+        android:id="@+id/fullscreen_content_controls"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fitsSystemWindows="true">
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_marginTop="32dp">
 
-        <LinearLayout
-            android:id="@+id/fullscreen_content_controls"
-            android:layout_width="match_parent"
+        <Button
+            android:id="@+id/cancel_button"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center_horizontal"
-            android:orientation="horizontal"
-            tools:ignore="UselessParent">
+            android:layout_marginEnd="16dp"
+            android:drawableEnd="@android:drawable/ic_menu_delete"
+            android:text="@string/cancelar" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal">
+        <Button
+            android:id="@+id/traducir_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:drawableEnd="@android:drawable/ic_menu_send"
+            android:text="@string/traducir" />
 
-                <Button
-                    android:id="@+id/cancel_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/cancelar"
-                    android:layout_marginEnd="16dp"/>
+    </LinearLayout>
 
-                <Button
-                    android:id="@+id/traducir_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/traducir"
-                    android:layout_marginStart="16dp"/>
-            </LinearLayout>
+    <ImageView
+        android:id="@+id/imageViewFondo2"
+        android:layout_width="match_parent"
+        android:layout_height="91dp"
+        android:src="@drawable/header"
+        android:layout_marginTop="32dp"/>
 
-        </LinearLayout>
-    </FrameLayout>
-
-</FrameLayout>
+</LinearLayout>
