@@ -1,5 +1,6 @@
 package com.speakinghands
 
+import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -72,6 +73,11 @@ class Traduciendo : AppCompatActivity() {
             .addHeader("x-api-key", "PwBpyZ0rW57yrbcNUhFUNaVJMMWDbwm6")
             .post(requestBody)
             .build()
+
+        startButton.setOnClickListener {
+            val i = Intent(this@Traduciendo, Inicio::class.java)
+            startActivity(i)
+        }
 
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {}
