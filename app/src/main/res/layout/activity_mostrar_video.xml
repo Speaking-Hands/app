@@ -7,10 +7,6 @@
     android:theme="@style/ThemeOverlay.SpeakingHands.FullscreenContainer"
     tools:context=".MostrarVideo">
 
-    <!-- The primary full-screen view. This can be replaced with whatever view
-         is needed to present your content, e.g. VideoView, SurfaceView,
-         TextureView, etc. -->
-
     <VideoView
         android:id="@+id/fullscreen_content"
         android:layout_width="match_parent"
@@ -24,7 +20,6 @@
 
         <LinearLayout
             android:id="@+id/fullscreen_content_controls"
-            style="@style/Widget.Theme.SpeakingHands.ButtonBar.Fullscreen"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center_horizontal"
@@ -34,30 +29,25 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#FFFFFF"
+                android:gravity="center"
                 android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/cancel_button"
-                    style="?android:attr/buttonBarButtonStyle"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/cancelar" />
+                    android:text="@string/cancelar"
+                    android:layout_marginEnd="16dp"/>
 
                 <Button
                     android:id="@+id/traducir_button"
-                    style="?android:attr/buttonBarButtonStyle"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/traducir" />
+                    android:text="@string/traducir"
+                    android:layout_marginStart="16dp"/>
             </LinearLayout>
 
         </LinearLayout>
     </FrameLayout>
-
-    <!-- This FrameLayout insets its children based on system windows using
-         android:fitsSystemWindows. -->
 
 </FrameLayout>
