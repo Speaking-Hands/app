@@ -3,7 +3,9 @@ package com.speakinghands
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View.INVISIBLE
+import android.view.View.GONE
+import android.view.View.VISIBLE
+import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
 import com.google.android.gms.common.util.IOUtils
@@ -24,8 +26,10 @@ class Traduciendo : AppCompatActivity() {
 
     private lateinit var binding: ActivityTraduciendoBinding
 
-    private lateinit var texto: TextView
+    private lateinit var textoTraduccion: TextView
+    private lateinit var textoResultado: TextView
     private lateinit var progressBar: ProgressBar
+    private lateinit var startButton: Button
 
 
     private var URL_BACKEND = "https://speaking-hands-api-zysstglldq-ey.a.run.app"
@@ -44,8 +48,11 @@ class Traduciendo : AppCompatActivity() {
         binding = ActivityTraduciendoBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        texto = binding.textView2
+        this.textoTraduccion = binding.textView2
+        this.textoResultado = binding.textView3
+        
         progressBar = binding.progressBar
+        startButton = binding.startButton
 
         val extras = intent.extras ?: throw Exception("Error in app")
 
@@ -79,8 +86,13 @@ class Traduciendo : AppCompatActivity() {
 
                 runOnUiThread {
                     println(jsonDataString)
-                    progressBar.visibility = INVISIBLE
-                    texto.text = result.getString("prediction")
+                    progressBar.visibility = GONE
+                    startButton.visibility = VISIBLE
+                    textoResultado.visibility = VISIBLE
+
+                    textoTraduccion.text = getString(R.string.traducido)
+
+                    textoResultado.text = result.getString("prediction")
                 }
 
             }

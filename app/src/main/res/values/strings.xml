@@ -10,4 +10,6 @@ Es un enfoque inclusivo que rompe las limitaciones de la comunicación tradicion
     <string name="cancelar">Cancelar</string>
     <string name="galeria">Galería</string>
     <string name="traduciendo">Traduciendo…</string>
+    <string name="new_translate">Nueva traducción</string>
+    <string name="traducido">Traducido!</string>
 </resources>
