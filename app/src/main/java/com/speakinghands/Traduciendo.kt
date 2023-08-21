@@ -18,6 +18,7 @@ import okhttp3.RequestBody
 import okhttp3.Response
 import org.json.JSONObject
 import java.io.IOException
+import java.util.concurrent.TimeUnit
 
 class Traduciendo : AppCompatActivity() {
 
@@ -29,7 +30,11 @@ class Traduciendo : AppCompatActivity() {
 
     private var URL_BACKEND = "https://speaking-hands-api-zysstglldq-ey.a.run.app"
 
-    private val client = OkHttpClient()
+    private val client = OkHttpClient.Builder()
+        .connectTimeout(10, TimeUnit.SECONDS)
+        .writeTimeout(10, TimeUnit.SECONDS)
+        .readTimeout(2, TimeUnit.MINUTES)
+        .build()
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
