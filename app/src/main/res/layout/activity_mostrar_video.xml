@@ -19,13 +19,24 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="500dp"
-        android:minHeight="500dp"
-        android:layout_gravity="center_vertical|center_horizontal">
-    <VideoView
-        android:id="@+id/fullscreen_content"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_centerInParent="true" />
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:minHeight="500dp">
+
+        <VideoView
+            android:id="@+id/fullscreen_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:progressDrawable="@drawable/blueprogress"
+            android:layout_width="fill_parent"
+            android:layout_height="6dp"
+            android:layout_marginTop="4dp"
+            android:layout_alignParentBottom="true" />
+
     </RelativeLayout>
 
     <LinearLayout
@@ -33,9 +44,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginTop="32dp"
         android:gravity="center"
-        android:orientation="horizontal"
-        android:layout_marginTop="32dp">
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/cancel_button"
@@ -59,7 +70,7 @@
         android:id="@+id/imageViewFondo2"
         android:layout_width="match_parent"
         android:layout_height="91dp"
-        android:src="@drawable/header"
-        android:layout_marginTop="32dp"/>
+        android:layout_marginTop="32dp"
+        android:src="@drawable/header" />
 
 </LinearLayout>
