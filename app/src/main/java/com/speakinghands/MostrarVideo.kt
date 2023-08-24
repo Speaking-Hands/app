@@ -1,12 +1,14 @@
 package com.speakinghands
 
 import android.content.Intent
+import android.media.MediaPlayer.OnPreparedListener
 import android.net.Uri
 import android.os.Bundle
 import android.widget.Button
 import android.widget.VideoView
 import androidx.appcompat.app.AppCompatActivity
 import com.speakinghands.databinding.ActivityMostrarVideoBinding
+
 
 class MostrarVideo : AppCompatActivity() {
 
@@ -30,6 +32,12 @@ class MostrarVideo : AppCompatActivity() {
         val extras = intent.extras ?: throw Exception("Error in app")
 
         val value = extras.get("videoUri") as Uri
+
+        fullscreenContent.setOnPreparedListener(OnPreparedListener { mediaPlayer ->
+            mediaPlayer.isLooping = true
+            mediaPlayer.setVolume(0f, 0f)
+        })
+
         fullscreenContent.setVideoURI(value)
         fullscreenContent.start()
 
