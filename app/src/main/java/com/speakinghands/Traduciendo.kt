@@ -2,13 +2,13 @@ package com.speakinghands
 
 import android.content.Intent
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.common.util.IOUtils
 import com.speakinghands.databinding.ActivityTraduciendoBinding
 import okhttp3.Call
@@ -80,7 +80,17 @@ class Traduciendo : AppCompatActivity() {
         }
 
         client.newCall(request).enqueue(object : Callback {
-            override fun onFailure(call: Call, e: IOException) {}
+            override fun onFailure(call: Call, e: IOException) {
+                runOnUiThread {
+                    progressBar.visibility = GONE
+                    startButton.visibility = VISIBLE
+                    textoResultado.visibility = VISIBLE
+
+                    textoTraduccion.text = getString(R.string.ups)
+
+                    textoResultado.text = getString(R.string.translate_fail)
+                }
+            }
 
             @Throws(IOException::class)
             override fun onResponse(call: Call, response: Response) {
@@ -104,5 +114,10 @@ class Traduciendo : AppCompatActivity() {
             }
         })
 
+    }
+
+    override fun onBackPressed() {
+        val i = Intent(this@Traduciendo, Inicio::class.java)
+        startActivity(i)
     }
 }

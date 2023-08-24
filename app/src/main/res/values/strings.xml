@@ -12,4 +12,6 @@ Es un enfoque inclusivo que rompe las limitaciones de la comunicación tradicion
     <string name="traduciendo">Traduciendo…</string>
     <string name="new_translate">Nueva traducción</string>
     <string name="traducido">Traducido!</string>
+    <string name="translate_fail">Fallo en la traducción</string>
+    <string name="ups">Ups!</string>
 </resources>
