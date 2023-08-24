@@ -85,13 +85,7 @@ class Traduciendo : AppCompatActivity() {
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 runOnUiThread {
-                    progressBar.visibility = GONE
-                    startButton.visibility = VISIBLE
-                    textoResultado.visibility = VISIBLE
-
-                    textoTraduccion.text = getString(R.string.ups)
-
-                    textoResultado.text = getString(R.string.translate_fail)
+                    obtainedTranslation(getString(R.string.ups), getString(R.string.translate_fail))
                 }
             }
 
@@ -105,13 +99,15 @@ class Traduciendo : AppCompatActivity() {
 
                 runOnUiThread {
                     println(jsonDataString)
-                    progressBar.visibility = GONE
-                    startButton.visibility = VISIBLE
-                    textoResultado.visibility = VISIBLE
 
-                    textoTraduccion.text = getString(R.string.traducido)
-
-                    textoResultado.text = result.getString("prediction")
+                    if (result.getString("prediction").trim() == "") {
+                        obtainedTranslation(getString(R.string.ups), getString(R.string.translate_fail))
+                    } else {
+                        obtainedTranslation(
+                            getString(R.string.traducido),
+                            result.getString("prediction")
+                        )
+                    }
                 }
 
             }
@@ -122,5 +118,14 @@ class Traduciendo : AppCompatActivity() {
     override fun onBackPressed() {
         val i = Intent(this@Traduciendo, Inicio::class.java)
         startActivity(i)
+    }
+
+    fun obtainedTranslation(traduccion: String, resultado: String){
+        progressBar.visibility = GONE
+        startButton.visibility = VISIBLE
+        textoResultado.visibility = VISIBLE
+
+        textoTraduccion.text = traduccion
+        textoResultado.text = resultado
     }
 }
