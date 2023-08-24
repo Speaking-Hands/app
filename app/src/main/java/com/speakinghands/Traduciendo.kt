@@ -5,6 +5,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import android.view.WindowManager
 import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -45,6 +46,8 @@ class Traduciendo : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_traduciendo)
+
+        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
 
         binding = ActivityTraduciendoBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -94,7 +97,7 @@ class Traduciendo : AppCompatActivity() {
 
             @Throws(IOException::class)
             override fun onResponse(call: Call, response: Response) {
-                if (!response.isSuccessful()) println("Unexpected code $response")
+                if (!response.isSuccessful) println("Unexpected code $response")
 
                 val jsonDataString = response.peekBody(Long.MAX_VALUE).string()
 
