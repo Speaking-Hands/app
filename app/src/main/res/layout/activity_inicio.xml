@@ -24,14 +24,12 @@
         android:src="@drawable/logo"
         android:layout_marginBottom="32dp"/>
 
-    <!--DESCRIPCION-->
-    <TextView
-        android:id="@+id/appDescription"
-        android:layout_width="347dp"
-        android:layout_height="wrap_content"
-        android:text="@string/welcomeDescription"
-        android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+    <!--ASL-->
+    <ImageView
+        android:id="@+id/imageASL"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:src="@drawable/asl"
         android:layout_marginBottom="32dp"/>
 
 
