@@ -9,6 +9,7 @@ import android.view.WindowManager
 import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
+import android.widget.VideoView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.common.util.IOUtils
 import com.speakinghands.databinding.ActivityTraduciendoBinding
@@ -30,6 +31,7 @@ class Traduciendo : AppCompatActivity() {
 
     private lateinit var textoTraduccion: TextView
     private lateinit var textoResultado: TextView
+    private lateinit var logo: VideoView
     private lateinit var progressBar: ProgressBar
     private lateinit var startButton: Button
 
@@ -54,7 +56,16 @@ class Traduciendo : AppCompatActivity() {
 
         this.textoTraduccion = binding.textView2
         this.textoResultado = binding.textView3
-        
+
+        this.logo = binding.logo
+        val uri = "android.resource://" + packageName + "/" + R.raw.video_loading
+        logo.setVideoURI(Uri.parse(uri))
+        logo.start()
+
+        logo.setOnPreparedListener { mediaPlayer ->
+            mediaPlayer.isLooping = true
+        }
+
         progressBar = binding.progressBar
         startButton = binding.startButton
 
