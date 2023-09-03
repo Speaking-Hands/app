@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linear"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:theme="@style/ThemeOverlay.SpeakingHands.FullscreenContainer"
+    android:background="?attr/fullscreenBackgroundColor"
+    android:orientation="vertical"
+    tools:context=".Traducido">
+
+    <ImageView
+        android:id="@+id/imageViewFondo1"
+        android:layout_width="match_parent"
+        android:layout_height="91dp"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="32dp"
+        android:src="@drawable/header" />
+
+    <LinearLayout
+        android:id="@+id/linear2"
+        android:layout_width="match_parent"
+        android:layout_height="590dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        tools:context=".Traduciendo">
+
+        <ImageView
+            android:id="@+id/imageLogo"
+            android:layout_width="match_parent"
+            android:layout_height="91dp"
+            android:layout_marginBottom="32dp"
+            android:src="@drawable/logo" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:layout_marginBottom="20dp"
+            />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+
+        <Button
+            android:id="@+id/startButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:drawableEnd="@android:drawable/ic_popup_sync"
+            android:text="@string/new_translate" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageViewFondo2"
+        android:layout_width="match_parent"
+        android:layout_height="91dp"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginTop="32dp"
+        android:src="@drawable/header" />
+
+</LinearLayout>

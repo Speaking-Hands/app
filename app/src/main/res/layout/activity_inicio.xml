@@ -5,6 +5,8 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
+    android:background="?attr/fullscreenBackgroundColor"
+    android:theme="@style/ThemeOverlay.SpeakingHands.FullscreenContainer"
     tools:context=".Inicio">
 
     <!--IMAGEN DE FONDO-->

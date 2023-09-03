@@ -29,12 +29,7 @@ class Traduciendo : AppCompatActivity() {
 
     private lateinit var binding: ActivityTraduciendoBinding
 
-    private lateinit var textoTraduccion: TextView
-    private lateinit var textoResultado: TextView
     private lateinit var logo: VideoView
-    private lateinit var progressBar: ProgressBar
-    private lateinit var startButton: Button
-
 
     private var URL_BACKEND = "https://speaking-hands-api-zysstglldq-ey.a.run.app"
 
@@ -54,9 +49,6 @@ class Traduciendo : AppCompatActivity() {
         binding = ActivityTraduciendoBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        this.textoTraduccion = binding.textView2
-        this.textoResultado = binding.textView3
-
         this.logo = binding.logo
         val uri = "android.resource://" + packageName + "/" + R.raw.video_loading
         logo.setVideoURI(Uri.parse(uri))
@@ -65,9 +57,6 @@ class Traduciendo : AppCompatActivity() {
         logo.setOnPreparedListener { mediaPlayer ->
             mediaPlayer.isLooping = true
         }
-
-        progressBar = binding.progressBar
-        startButton = binding.startButton
 
         val extras = intent.extras ?: throw Exception("Error in app")
 
@@ -88,15 +77,10 @@ class Traduciendo : AppCompatActivity() {
             .post(requestBody)
             .build()
 
-        startButton.setOnClickListener {
-            val i = Intent(this@Traduciendo, Inicio::class.java)
-            startActivity(i)
-        }
-
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 runOnUiThread {
-                    obtainedTranslation(getString(R.string.ups), getString(R.string.translate_fail))
+                    obtainedTranslation("")
                 }
             }
 
@@ -110,15 +94,7 @@ class Traduciendo : AppCompatActivity() {
 
                 runOnUiThread {
                     println(jsonDataString)
-
-                    if (result.getString("prediction").trim() == "") {
-                        obtainedTranslation(getString(R.string.ups), getString(R.string.translate_fail))
-                    } else {
-                        obtainedTranslation(
-                            getString(R.string.traducido),
-                            result.getString("prediction")
-                        )
-                    }
+                    obtainedTranslation(result.getString("prediction"))
                 }
 
             }
@@ -131,12 +107,9 @@ class Traduciendo : AppCompatActivity() {
         startActivity(i)
     }
 
-    fun obtainedTranslation(traduccion: String, resultado: String){
-        progressBar.visibility = GONE
-        startButton.visibility = VISIBLE
-        textoResultado.visibility = VISIBLE
-
-        textoTraduccion.text = traduccion
-        textoResultado.text = resultado
+    fun obtainedTranslation(resultado: String){
+        val i = Intent(this@Traduciendo, Traducido::class.java)
+        i.putExtra("result", resultado)
+        startActivity(i)
     }
 }
