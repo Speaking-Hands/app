@@ -16,6 +16,7 @@ class Inicio : AppCompatActivity() {
 
     private lateinit var grabarButton: Button
     private lateinit var galeriaButton: Button
+    private lateinit var infoButton: Button
 
     private val GALLERY = 1
     private val CAMERA = 2
@@ -29,12 +30,18 @@ class Inicio : AppCompatActivity() {
 
         grabarButton = binding.buttonGrabar
         galeriaButton = binding.buttonGaleria
+        infoButton = binding.info
 
         checkPermissions()
 
         grabarButton.setOnClickListener {
             val i = Intent(MediaStore.ACTION_VIDEO_CAPTURE)
             startActivityForResult(i, CAMERA)
+        }
+
+        infoButton.setOnClickListener {
+            val i = Intent(this@Inicio, Info::class.java)
+            startActivity(i)
         }
 
         galeriaButton.setOnClickListener {

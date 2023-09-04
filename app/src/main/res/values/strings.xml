@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Speaking Hands</string>
-    <string name="grabar">Grabar</string>
+    <string name="grabar">Cámara</string>
+    <string name="welcomeDescription">SpeakingHands elimina barreras comunicativas, graba gestos de lengua de señas para convertirlos en texto, permitiendo una comunicación fluida e inclusiva. Únete a nosotros y abre nuevas vías de conexión con personas con discapacidad auditiva.</string>
     <string name="traducir">Traducir</string>
     <string name="cancelar">Cancelar</string>
     <string name="galeria">Galería</string>
@@ -9,4 +10,6 @@
     <string name="traducido">Traducido!</string>
     <string name="translate_fail">Fallo en la traducción</string>
     <string name="ups">Ups!</string>
+    <string name="volver">Volver</string>
+    <string name="title_info">Nuestra misión</string>
 </resources>

@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:gravity="center"
     android:orientation="vertical"
     android:background="?attr/fullscreenBackgroundColor"
@@ -22,18 +23,18 @@
     <ImageView
         android:id="@+id/imageLogo"
         android:layout_width="match_parent"
-        android:layout_height="91dp"
-        android:src="@drawable/logo"
+        android:layout_height="500dp"
+        android:src="@drawable/logo_intro"
         android:layout_marginBottom="32dp"/>
 
-    <!--ASL-->
-    <ImageView
-        android:id="@+id/imageASL"
-        android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:src="@drawable/asl"
-        android:layout_marginBottom="32dp"/>
-
+    <Button
+        android:id="@+id/info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="0dp"
+        android:height="48dp"
+        android:drawableEnd="@drawable/info_icon"
+        app:iconPadding="0dp" />
 
     <!--GRABAR Y GALERIA-->
     <LinearLayout
