@@ -3,12 +3,7 @@ package com.speakinghands
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.view.View.GONE
-import android.view.View.VISIBLE
 import android.view.WindowManager
-import android.widget.Button
-import android.widget.ProgressBar
-import android.widget.TextView
 import android.widget.VideoView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.common.util.IOUtils
