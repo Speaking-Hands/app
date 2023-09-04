@@ -9,7 +9,6 @@
     <string name="new_translate">Nueva traducción</string>
     <string name="traducido">Traducido!</string>
     <string name="translate_fail">Fallo en la traducción</string>
-    <string name="ups">Ups!</string>
     <string name="volver">Volver</string>
     <string name="title_info">Nuestra misión</string>
 </resources>

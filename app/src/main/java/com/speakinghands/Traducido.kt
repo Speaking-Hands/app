@@ -11,7 +11,6 @@ class Traducido : AppCompatActivity() {
 
     private lateinit var binding: ActivityTraducidoBinding
 
-    private lateinit var textoTraduccion: TextView
     private lateinit var textoResultado: TextView
     private lateinit var startButton: Button
 
@@ -23,7 +22,6 @@ class Traducido : AppCompatActivity() {
         binding = ActivityTraducidoBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        this.textoTraduccion = binding.textView2
         this.textoResultado = binding.textView3
 
         startButton = binding.startButton
@@ -32,17 +30,7 @@ class Traducido : AppCompatActivity() {
 
         val value = extras.get("result") as String
 
-        if (value.trim() == "") {
-            showResult(
-                getString(R.string.ups),
-                getString(R.string.translate_fail)
-            )
-        } else {
-            showResult(
-                getString(R.string.traducido),
-                value
-            )
-        }
+        if (value.trim() == "") showResult(getString(R.string.translate_fail)) else showResult(value)
 
         startButton.setOnClickListener {
             val i = Intent(this@Traducido, Inicio::class.java)
@@ -55,8 +43,7 @@ class Traducido : AppCompatActivity() {
         startActivity(i)
     }
 
-    fun showResult(traduccion: String, resultado: String) {
-        textoTraduccion.text = traduccion
+    fun showResult(resultado: String) {
         textoResultado.text = resultado
     }
 }
