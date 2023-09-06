@@ -3,6 +3,7 @@ package com.speakinghands
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.WindowManager
 import android.widget.VideoView
 import androidx.appcompat.app.AppCompatActivity
@@ -19,6 +20,7 @@ import okhttp3.Response
 import org.json.JSONObject
 import java.io.IOException
 import java.util.concurrent.TimeUnit
+
 
 class Traduciendo : AppCompatActivity() {
 
