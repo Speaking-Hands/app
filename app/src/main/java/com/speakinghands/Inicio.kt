@@ -17,6 +17,8 @@ class Inicio : AppCompatActivity() {
     private lateinit var grabarButton: Button
     private lateinit var galeriaButton: Button
     private lateinit var infoButton: Button
+    private lateinit var menu2Button: Button
+    private lateinit var menu3Button: Button
 
     private val GALLERY = 1
     private val CAMERA = 2
@@ -31,6 +33,8 @@ class Inicio : AppCompatActivity() {
         grabarButton = binding.buttonGrabar
         galeriaButton = binding.buttonGaleria
         infoButton = binding.info
+        menu2Button = binding.menu2
+        menu3Button = binding.menu3
 
         checkPermissions()
 
@@ -41,6 +45,16 @@ class Inicio : AppCompatActivity() {
 
         infoButton.setOnClickListener {
             val i = Intent(this@Inicio, Info::class.java)
+            startActivity(i)
+        }
+
+        menu2Button.setOnClickListener {
+            val i = Intent(this@Inicio, Proximamente::class.java)
+            startActivity(i)
+        }
+
+        menu3Button.setOnClickListener {
+            val i = Intent(this@Inicio, Proximamente::class.java)
             startActivity(i)
         }
 

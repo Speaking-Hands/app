@@ -5,6 +5,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.WindowManager
+import android.widget.Button
 import android.widget.VideoView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.common.util.IOUtils
@@ -36,6 +37,9 @@ class Traduciendo : AppCompatActivity() {
         .readTimeout(2, TimeUnit.MINUTES)
         .build()
 
+    private lateinit var menu2Button: Button
+    private lateinit var menu3Button: Button
+
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
@@ -45,6 +49,19 @@ class Traduciendo : AppCompatActivity() {
 
         binding = ActivityTraduciendoBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        menu2Button = binding.menu2
+        menu3Button = binding.menu3
+
+
+        menu2Button.setOnClickListener {
+            val i = Intent(this@Traduciendo, Proximamente::class.java)
+            startActivity(i)
+        }
+
+        menu3Button.setOnClickListener {
+            val i = Intent(this@Traduciendo, Proximamente::class.java)
+            startActivity(i)
+        }
 
         this.logo = binding.logo
         val uri = "android.resource://" + packageName + "/" + R.raw.video_loading
@@ -104,7 +121,7 @@ class Traduciendo : AppCompatActivity() {
         startActivity(i)
     }
 
-    fun obtainedTranslation(resultado: String){
+    fun obtainedTranslation(resultado: String) {
         val i = Intent(this@Traduciendo, Traducido::class.java)
         i.putExtra("result", resultado)
         startActivity(i)

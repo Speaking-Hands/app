@@ -17,6 +17,10 @@ class MostrarVideo : AppCompatActivity() {
     private lateinit var cancelarButton: Button
     private lateinit var traducirButton: Button
 
+    private lateinit var menu2Button: Button
+    private lateinit var menu3Button: Button
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -28,6 +32,8 @@ class MostrarVideo : AppCompatActivity() {
         fullscreenContent = binding.fullscreenContent
         cancelarButton = binding.cancelButton
         traducirButton = binding.traducirButton
+        menu2Button = binding.menu2
+        menu3Button = binding.menu3
 
         val extras = intent.extras ?: throw Exception("Error in app")
 
@@ -51,6 +57,16 @@ class MostrarVideo : AppCompatActivity() {
             i.putExtra("videoUri", value)
             startActivity(i)
         }
+        menu2Button.setOnClickListener {
+            val i = Intent(this@MostrarVideo, Proximamente::class.java)
+            startActivity(i)
+        }
+
+        menu3Button.setOnClickListener {
+            val i = Intent(this@MostrarVideo, Proximamente::class.java)
+            startActivity(i)
+        }
+
     }
 
 }
