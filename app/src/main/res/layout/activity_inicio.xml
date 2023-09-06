@@ -33,7 +33,7 @@
         android:layout_height="wrap_content"
         android:minWidth="0dp"
         android:height="48dp"
-        android:background="none"
+        android:background="@android:color/transparent"
         android:drawableEnd="@drawable/info_icon"
         app:iconPadding="0dp" />
 
