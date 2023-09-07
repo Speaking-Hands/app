@@ -5,9 +5,12 @@ import android.media.MediaPlayer.OnPreparedListener
 import android.net.Uri
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ProgressBar
 import android.widget.VideoView
 import androidx.appcompat.app.AppCompatActivity
 import com.speakinghands.databinding.ActivityMostrarVideoBinding
+import java.util.Timer
+import java.util.TimerTask
 
 
 class MostrarVideo : AppCompatActivity() {
@@ -16,6 +19,8 @@ class MostrarVideo : AppCompatActivity() {
     private lateinit var fullscreenContent: VideoView
     private lateinit var cancelarButton: Button
     private lateinit var traducirButton: Button
+    private lateinit var progressBar: ProgressBar
+
 
     private lateinit var menu2Button: Button
     private lateinit var menu3Button: Button
@@ -32,6 +37,7 @@ class MostrarVideo : AppCompatActivity() {
         fullscreenContent = binding.fullscreenContent
         cancelarButton = binding.cancelButton
         traducirButton = binding.traducirButton
+        progressBar = binding.progressBar
         menu2Button = binding.menu2
         menu3Button = binding.menu3
 
@@ -42,6 +48,9 @@ class MostrarVideo : AppCompatActivity() {
         fullscreenContent.setOnPreparedListener(OnPreparedListener { mediaPlayer ->
             mediaPlayer.isLooping = true
             mediaPlayer.setVolume(0f, 0f)
+
+            setDuration();
+            timerCounter();
         })
 
         fullscreenContent.setVideoURI(value)
@@ -67,6 +76,32 @@ class MostrarVideo : AppCompatActivity() {
             startActivity(i)
         }
 
+    }
+
+    private var timer: Timer? = null
+    private fun timerCounter() {
+        timer = Timer()
+        val task: TimerTask = object : TimerTask() {
+            override fun run() {
+                runOnUiThread(Runnable { updateUI() })
+            }
+        }
+        timer!!.schedule(task, 0, 20)
+    }
+
+    private var duration = 0
+
+    private fun setDuration() {
+        duration = fullscreenContent.getDuration()
+    }
+
+    private fun updateUI() {
+        if (progressBar.progress >= 100) {
+            timer!!.cancel()
+        }
+        val current: Int = fullscreenContent.getCurrentPosition()
+        val progress = current * 100 / duration
+        progressBar.progress = progress
     }
 
 }
