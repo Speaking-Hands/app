@@ -14,7 +14,7 @@
         android:id="@+id/imageViewFondo"
         android:layout_width="match_parent"
         android:layout_height="91dp"
-        android:layout_marginBottom="70dp"
+        android:layout_marginBottom="84dp"
         android:src="@drawable/header" />
 
     <RelativeLayout
