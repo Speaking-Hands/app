@@ -6,26 +6,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:gravity="center"
     android:orientation="vertical"
-    android:background="?attr/fullscreenBackgroundColor"
+    android:background="@drawable/background"
     android:theme="@style/ThemeOverlay.SpeakingHands.FullscreenContainer"
     tools:context=".Inicio">
-
-    <!--IMAGEN DE FONDO-->
-    <ImageView
-        android:id="@+id/imageViewFondo"
-        android:layout_width="match_parent"
-        android:layout_height="91dp"
-        android:src="@drawable/header"
-        android:layout_marginBottom="34dp"/>
 
     <!--TITULO-->
 
     <ImageView
         android:id="@+id/imageLogo"
         android:layout_width="match_parent"
-        android:layout_height="500dp"
+        android:layout_height="400dp"
         android:src="@drawable/logo_intro"
-        android:layout_marginBottom="32dp"/>
+        android:layout_marginBottom="157dp"
+        android:layout_marginTop="26dp"/>
 
     <Button
         android:id="@+id/info"
@@ -35,7 +28,8 @@
         android:height="48dp"
         android:background="@android:color/transparent"
         android:drawableEnd="@drawable/info_icon"
-        app:iconPadding="0dp" />
+        app:iconPadding="0dp"
+        android:layout_marginTop="50dp"/>
 
     <!--GRABAR Y GALERIA-->
     <LinearLayout
@@ -66,7 +60,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:gravity="center"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="54dp"
         android:background="?attr/colorPrimary"
         android:orientation="horizontal">
 

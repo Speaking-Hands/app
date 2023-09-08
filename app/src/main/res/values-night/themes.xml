@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.SpeakingHands" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
-         <item name="colorPrimary">@color/light_blue_200</item>
+         <item name="colorPrimary">@color/light_blue_600</item>
     </style>
 
     <style name="ThemeOverlay.SpeakingHands.FullscreenContainer" parent="">
