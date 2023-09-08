@@ -6,25 +6,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:gravity="center"
     android:orientation="vertical"
-    android:background="?attr/fullscreenBackgroundColor"
+    android:background="@drawable/background"
     android:theme="@style/ThemeOverlay.SpeakingHands.FullscreenContainer"
     tools:context=".Info">
-
-    <!--IMAGEN DE FONDO-->
-    <ImageView
-        android:id="@+id/imageViewFondo"
-        android:layout_width="match_parent"
-        android:layout_height="91dp"
-        android:src="@drawable/header"
-        android:layout_marginBottom="22dp"/>
 
     <ImageView
         android:id="@+id/imageLogo"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginBottom="150dp"
-        android:layout_marginTop="150dp"
-        android:src="@drawable/logo" />
+        android:layout_height="400dp"
+        android:src="@drawable/logo_intro"
+        android:layout_marginBottom="217dp"
+        android:layout_marginTop="26dp"/>
 
     <TextView
         android:id="@+id/textView3"
@@ -32,7 +24,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="@string/proximamente"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="20dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
     <Button
