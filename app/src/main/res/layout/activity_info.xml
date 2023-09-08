@@ -6,17 +6,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:gravity="center"
     android:orientation="vertical"
-    android:background="?attr/fullscreenBackgroundColor"
+    android:background="@drawable/background"
     android:theme="@style/ThemeOverlay.SpeakingHands.FullscreenContainer"
     tools:context=".Info">
 
     <!--IMAGEN DE FONDO-->
-    <ImageView
-        android:id="@+id/imageViewFondo"
-        android:layout_width="match_parent"
-        android:layout_height="91dp"
-        android:src="@drawable/header"
-        android:layout_marginBottom="22dp"/>
+<!--    <ImageView-->
+<!--        android:id="@+id/imageViewFondo"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="91dp"-->
+<!--        android:src="@drawable/header"-->
+<!--        android:layout_marginBottom="22dp"/>-->
 
     <TextView
         android:id="@+id/title"
@@ -24,8 +24,10 @@
         android:layout_height="wrap_content"
         android:text="@string/title_info"
         android:textAlignment="center"
+        android:textColor="@color/white"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        android:layout_marginBottom="0dp"/>
+        android:layout_marginBottom="0dp"
+        android:layout_marginTop="13dp"/>
 
     <TextView
         android:id="@+id/appDescription"
@@ -34,13 +36,14 @@
         android:text="@string/welcomeDescription"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textColor="@color/white"
         android:layout_marginBottom="32dp"/>
 
     <!--ASL-->
     <ImageView
         android:id="@+id/imageASL"
         android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_height="500dp"
         android:layout_marginBottom="32dp"
         android:src="@drawable/asl" />
 
