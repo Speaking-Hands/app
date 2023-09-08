@@ -29,7 +29,8 @@
         android:background="@android:color/transparent"
         android:drawableEnd="@drawable/info_icon"
         app:iconPadding="0dp"
-        android:layout_marginTop="50dp"/>
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="20dp"/>
 
     <!--GRABAR Y GALERIA-->
     <LinearLayout
