@@ -4,29 +4,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/fullscreenBackgroundColor"
+    android:background="@drawable/background"
     android:gravity="center"
     android:orientation="vertical"
     android:theme="@style/ThemeOverlay.SpeakingHands.FullscreenContainer"
     tools:context=".MostrarVideo">
 
-    <ImageView
-        android:id="@+id/imageViewFondo"
-        android:layout_width="match_parent"
-        android:layout_height="91dp"
-        android:layout_marginBottom="84dp"
-        android:src="@drawable/header" />
-
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="500dp"
+        android:layout_height="670dp"
         android:layout_gravity="center_vertical|center_horizontal"
-        android:minHeight="500dp">
+        android:minHeight="670dp">
 
         <VideoView
             android:id="@+id/fullscreen_content"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_centerInParent="true" />
 
         <ProgressBar
@@ -35,7 +28,7 @@
             android:progressDrawable="@drawable/blueprogress"
             android:layout_width="fill_parent"
             android:layout_height="6dp"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="10dp"
             android:layout_alignParentBottom="true" />
 
     </RelativeLayout>
