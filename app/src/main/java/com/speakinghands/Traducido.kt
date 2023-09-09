@@ -13,6 +13,7 @@ class Traducido : AppCompatActivity() {
 
     private lateinit var textoResultado: TextView
     private lateinit var startButton: Button
+    private lateinit var backButton: Button
     private lateinit var menu2Button: Button
     private lateinit var menu3Button: Button
 
@@ -27,6 +28,7 @@ class Traducido : AppCompatActivity() {
         this.textoResultado = binding.textView3
 
         startButton = binding.startButton
+        backButton = binding.backButton
         menu2Button = binding.menu2
         menu3Button = binding.menu3
 
@@ -40,6 +42,12 @@ class Traducido : AppCompatActivity() {
             val i = Intent(this@Traducido, Inicio::class.java)
             startActivity(i)
         }
+
+        backButton.setOnClickListener {
+            val i = Intent(this@Traducido, Inicio::class.java)
+            startActivity(i)
+        }
+
         menu2Button.setOnClickListener {
             val i = Intent(this@Traducido, Proximamente::class.java)
             startActivity(i)
