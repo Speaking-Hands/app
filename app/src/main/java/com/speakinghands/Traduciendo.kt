@@ -37,9 +37,6 @@ class Traduciendo : AppCompatActivity() {
         .readTimeout(2, TimeUnit.MINUTES)
         .build()
 
-    private lateinit var menu2Button: Button
-    private lateinit var menu3Button: Button
-
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
@@ -49,19 +46,6 @@ class Traduciendo : AppCompatActivity() {
 
         binding = ActivityTraduciendoBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        menu2Button = binding.menu2
-        menu3Button = binding.menu3
-
-
-        menu2Button.setOnClickListener {
-            val i = Intent(this@Traduciendo, Proximamente::class.java)
-            startActivity(i)
-        }
-
-        menu3Button.setOnClickListener {
-            val i = Intent(this@Traduciendo, Proximamente::class.java)
-            startActivity(i)
-        }
 
         this.logo = binding.logo
         val uri = "android.resource://" + packageName + "/" + R.raw.video_loading
