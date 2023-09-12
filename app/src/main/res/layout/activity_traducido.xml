@@ -76,31 +76,32 @@
         <LinearLayout
             android:id="@+id/linear3"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="52dp"
             android:gravity="end|center_vertical"
             android:orientation="horizontal"
             android:layout_marginTop="30dp"
             tools:context=".Traduciendo">
 
-            <Button
+            <!--<Button
                 android:id="@+id/volver_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="50dp"
                 android:background="@drawable/languagebox"
-                android:textColor="?android:colorPrimary"
-                android:text="@string/english" />
-        <Button
-            android:id="@+id/sound"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:minWidth="0dp"
-            android:height="48dp"
-            android:background="@android:color/transparent"
-            android:drawableEnd="@drawable/volume"
-            android:layout_marginEnd="10dp"
-            app:iconPadding="0dp"
-            android:layout_gravity="end"/>
+                android:text="@string/english"
+                android:textColor="?android:colorPrimary" />
+
+            <Button
+                android:id="@+id/sound"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginEnd="10dp"
+                android:height="48dp"
+                android:background="@android:color/transparent"
+                android:drawableEnd="@drawable/volume"
+                android:minWidth="0dp"
+                app:iconPadding="0dp" />-->
         </LinearLayout>
 
     </LinearLayout>
